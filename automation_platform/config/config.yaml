@@ -1,0 +1,51 @@
+# Invoice Automation Platform Configuration
+
+platform:
+  name: "Invoice Automation Platform"
+  version: "1.0.0"
+  environment: "development"
+
+database:
+  path: "automation_platform/data/automation.db"
+  timeout: 30
+
+queue:
+  max_retries: 3
+  retry_delay_seconds: 10
+  poll_interval_seconds: 2
+  batch_size: 10
+
+worker:
+  max_concurrent_jobs: 4
+  shutdown_timeout_seconds: 30
+
+logging:
+  level: "INFO"
+  log_dir: "automation_platform/logs"
+  log_to_file: true
+  log_to_db: true
+  max_file_size_mb: 10
+  backup_count: 5
+
+processing:
+  supported_formats:
+    - ".pdf"
+    - ".png"
+    - ".jpg"
+    - ".jpeg"
+    - ".csv"
+    - ".xlsx"
+  invoice_dir: "automation_platform/data/invoices"
+  output_dir: "automation_platform/reports"
+
+email:
+  enabled: false
+  imap_server: ""
+  imap_port: 993
+  username: ""
+  # Password should be set via AUTOMATION_EMAIL_PASSWORD environment variable
+
+uipath:
+  integration_enabled: true
+  api_base_url: "http://localhost:5000"
+  poll_interval_seconds: 5
